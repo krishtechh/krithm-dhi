@@ -1,0 +1,135 @@
+{
+  "project_name": "Krithim Dhi AI/ML Society Website",
+  "theme": "dark",
+  "typography": {
+    "headings": {
+      "font_family": "Cabinet Grotesk, sans-serif",
+      "style": "tracking-tighter, huge scales (text-5xl to text-[8vw] for hero), uppercase, bold.",
+      "notes": "Word-by-word reveal animations using GSAP."
+    },
+    "body": {
+      "font_family": "Outfit, sans-serif",
+      "style": "text-[#A1A1AA] (muted white), tracking-normal, elegant legibility."
+    },
+    "labels_and_mono": {
+      "font_family": "JetBrains Mono, monospace",
+      "style": "uppercase, tracking-[0.2em], text-xs to text-sm, text-[#22D3EE] (neon cyan) or text-[#A1A1AA]."
+    }
+  },
+  "colors": {
+    "background": {
+      "base": "#050505",
+      "surface_1": "#080808",
+      "surface_2": "#0D0D0D",
+      "surface_3": "#111111"
+    },
+    "accents": {
+      "electric_violet": "#8B5CF6",
+      "neon_cyan": "#22D3EE",
+      "magenta": "#D946EF"
+    },
+    "text": {
+      "primary": "#F5F5F5",
+      "muted": "#A1A1AA"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": {
+      "background": "rgba(255, 255, 255, 0.03)",
+      "border": "1px solid rgba(255, 255, 255, 0.08)",
+      "backdrop_blur": "backdrop-blur-2xl",
+      "border_radius": "24px (rounded-3xl) or higher",
+      "inner_highlight": "inset 0 1px 0 rgba(255,255,255,0.1)"
+    },
+    "background_effects": {
+      "noise": "Subtle grain overlay using SVG noise or background-image pattern (fixed, pointer-events-none, opacity-[0.03]).",
+      "grid": "Faint white/5 grid lines over the black background.",
+      "ambient_light": "Blurred radial gradients (cyan #22D3EE and violet #8B5CF6) fixed in background, opacity-10 to 20, very soft (blur-[120px])."
+    },
+    "custom_cursor": {
+      "style": "Glowing dot + lagging blurred ring (framer-motion or custom hook). Expands on hover over interactive elements. Displays 'VIEW' label when hovering image cards. Hide on touch devices."
+    }
+  },
+  "layouts": {
+    "hero": "100-110vh, relative, flex flex-col justify-center items-center. Eyebrow 'AIML DEPARTMENT • ADGIPS', huge stacked heading 'KRITHIM DHI'. Glowing AI sphere or abstract particles behind text.",
+    "community": "Stats grid (animated count-up). Floating topic chips (AI, ML, GEN AI, etc) with floating animations.",
+    "what_we_do": "Grid layout, 6 glass cards. Subdued but premium aesthetic.",
+    "events": "GSAP ScrollTrigger stacked cards. Sticky container; as user scrolls, cards translate up and scale down slightly.",
+    "team": "Pinned horizontal scroll section (GSAP ScrollTrigger). Huge text 'THE PEOPLE BEHIND THE MACHINE' with 10 premium profile cards scrolling horizontally.",
+    "contact": "Left: Glass form (Name, Email, Subject, Message, Send). Right: Alternate contact info cards. Use sonner for success toast."
+  },
+  "motion": {
+    "scrolling": "Lenis smooth scroll. Wrap root or main with Lenis setup.",
+    "loader": "Cinematic loading screen (1-2s): Logo, 'INITIALIZING INTELLIGENCE...', percentage counter, thin progress line loading left-to-right.",
+    "gsap": "useGSAP hook. ScrollTrigger for fades, pin sections, parallax elements. Staggered reveals.",
+    "signature_interactions": [
+      "Scroll-driven stacked cards (Events).",
+      "Pinned horizontal scroll (Team).",
+      "Side section counter '01 / 08' updating via scroll progress."
+    ]
+  },
+  "image_urls": {
+    "hero_ai_visual": {
+      "url": "https://images.unsplash.com/photo-1557264337-e8a93017fe92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGFpJTIwbmV1cmFsJTIwbmV0d29yayUyMGRhcmt8ZW58MHx8fHwxNzg4MDk0NjEzfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Concentric rings of blue and purple. Use as ambient blurred orb behind hero text."
+    },
+    "events_stage": {
+      "url": "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa",
+      "description": "Dark stage with 'IMAGINE EVERY THING' text. Perfect for Vision or Events placeholder."
+    },
+    "hackathon_coding": {
+      "url": "https://images.pexels.com/photos/6424590/pexels-photo-6424590.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Laptop screen with code, dark blue lighting. Use for 'What We Do' cards or 'Projects'."
+    },
+    "research_team": {
+      "url": "https://images.pexels.com/photos/5380607/pexels-photo-5380607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Group of people in a dark room working on computers. Use for 'Research' or 'Community'."
+    }
+  },
+  "3d_libraries": {
+    "recommendation": "For the custom cursor and floating interactions, Framer Motion and GSAP are preferred. If you choose to add 3D elements, use simple CSS 3D transforms or react-tsparticles for glowing ambient specs."
+  },
+  "component_name": [
+    "CinematicLoader",
+    "CustomCursor",
+    "FloatingNavbar",
+    "SectionCounter",
+    "HeroSection",
+    "VisionMissionSection",
+    "CommunitySection",
+    "WhatWeDoSection",
+    "AchievementsSection",
+    "IndustryConnectSection",
+    "EventsScrollStack",
+    "TeamHorizontalScroll",
+    "ContactSection",
+    "Footer"
+  ],
+  "accessibility": {
+    "focus_states": "High contrast outline for keyboard focus. (e.g., focus:ring-2 focus:ring-[#8B5CF6]).",
+    "reduced_motion": "Include CSS or JS logic to disable GSAP animations if window.matchMedia('(prefers-reduced-motion: reduce)') is true.",
+    "aria": "Use proper ARIA labels. aria-hidden='true' for visual noise and decorative background particles."
+  },
+  "instructions_to_main_agent": [
+    "CRITICAL: The website MUST be exclusively styled in dark mode. Do not add a light theme or light mode variants.",
+    "Install required dependencies: 'npm install gsap @studio-freight/lenis framer-motion lucide-react sonner clsx tailwind-merge'.",
+    "Typography: You must import 'Cabinet Grotesk' (or fallback to 'Clash Display' / 'Outfit' for big headings), 'JetBrains Mono' for labels.",
+    "Glass cards MUST strictly match: bg-white/[0.03], border-white/[0.08], backdrop-blur-2xl, rounded-[24px].",
+    "Do NOT use Shadcn section/card components for complex layouts. Build them manually with pure HTML + Tailwind to achieve custom overlaps.",
+    "Implement a cinematic loading screen that displays 'INITIALIZING INTELLIGENCE...' and unmounts after 1.5 - 2s.",
+    "Implement the Events stack using GSAP ScrollTrigger: pin the section, and iterate through cards to transform their Y and Scale based on scroll.",
+    "Implement Team horizontal scroll using GSAP ScrollTrigger. Pin the container and translate the inner flex row on the X-axis.",
+    "Implement the side counter (01/08) fixed on the right or left edge, changing index as sections reach top.",
+    "Strictly use the placeholders like [STUDENT NAME] and [EVENT TITLE] rather than inventing fake details."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Create depth through layered design elements with z-index hierarchy.",
+    "DO NOT apply universal transition (e.g., 'transition: all'). This breaks GSAP transforms. Use specific transitions ('transition-colors', 'transition-opacity').",
+    "DO NOT center align the app container. No '.App { text-align: center; }'.",
+    "Include a 'data-testid' attribute on all interactive and key informational elements.",
+    "Use sonner for toast notifications.",
+    "Do NOT use complete transparent backgrounds for the floating navbar. Use glassmorphism.",
+    "Make creative, distinctive frontends. Avoid the 'AI slop' aesthetic. Emphasize asymmetric balance and luxurious spacing.",
+    "Mobile-first layouts are mandatory. Ensure huge typography scales down gracefully on small screens and disable heavy custom cursors on touch devices."
+  ]
+}
