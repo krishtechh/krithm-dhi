@@ -2,35 +2,66 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Reveal, SectionHeading } from "@/components/Reveal";
-import { STATS, TOPICS } from "@/data/content";
+import { STATS } from "@/data/content";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Stat = ({ value, suffix, label, testId }) => {
+const StatCard = ({ stat, testId }) => {
     const numRef = useRef(null);
+
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            const obj = { v: 0 };
-            gsap.to(obj, {
-                v: value,
-                duration: 1.8,
-                ease: "power2.out",
-                scrollTrigger: { trigger: numRef.current, start: "top 88%" },
-                onUpdate: () => {
-                    if (numRef.current) numRef.current.textContent = Math.round(obj.v);
-                },
+        if (stat.type === "number" && stat.value) {
+            const ctx = gsap.context(() => {
+                const obj = { v: 0 };
+                gsap.to(obj, {
+                    v: stat.value,
+                    duration: 1.8,
+                    ease: "power2.out",
+                    scrollTrigger: { trigger: numRef.current, start: "top 88%" },
+                    onUpdate: () => {
+                        if (numRef.current) numRef.current.textContent = Math.round(obj.v);
+                    },
+                });
             });
-        });
-        return () => ctx.revert();
-    }, [value]);
+            return () => ctx.revert();
+        }
+    }, [stat]);
+
     return (
-        <div className="glass-card p-6 text-center sm:p-8" data-testid={testId}>
-            <div className="font-display text-5xl font-extrabold text-[#F5F5F5] sm:text-6xl">
-                <span ref={numRef}>0</span>
-                <span className="text-gradient">{suffix}</span>
+        <div
+            data-testid={testId}
+            className={`glass-card group relative flex min-h-[210px] flex-col justify-between overflow-hidden !rounded-3xl p-8 transition-all duration-500 hover:border-white/30 hover:bg-white/[0.04] hover:shadow-[0_0_35px_rgba(139,92,246,0.15)] sm:p-10 ${stat.span}`}
+        >
+            {/* Background subtle radial glow on hover */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/[0.03] blur-2xl transition-all duration-500 group-hover:bg-[#22D3EE]/[0.08]"
+            />
+
+            {/* Stat Value / Display Header */}
+            <div>
+                {stat.type === "number" ? (
+                    <div className="font-display text-6xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
+                        <span
+                            ref={numRef}
+                            className={`bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}
+                        >
+                            0
+                        </span>
+                        <span className={`bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
+                            {stat.suffix}
+                        </span>
+                    </div>
+                ) : (
+                    <div className="font-display text-5xl font-extrabold uppercase tracking-tight text-white sm:text-6xl lg:text-7xl">
+                        {stat.displayText}
+                    </div>
+                )}
             </div>
-            <div className="mt-3 font-mono2 text-[10px] uppercase tracking-[0.25em] text-[#A1A1AA] sm:text-xs">
-                {label}
+
+            {/* Subtext Description */}
+            <div className="mt-8 font-sans text-xs font-medium leading-relaxed text-[#A1A1AA] transition-colors duration-300 group-hover:text-white/90 sm:text-sm">
+                {stat.label}
             </div>
         </div>
     );
@@ -49,23 +80,13 @@ export default function Community() {
                     label="Our Community"
                     lines={["CURIOUS MINDS.", "ONE COMMUNITY.", "LIMITLESS POSSIBILITIES."]}
                 />
-                <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+
+                {/* Bento Grid layout matching reference design */}
+                <div className="mt-16 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-6">
                     {STATS.map((s, i) => (
-                        <Reveal key={s.label} delay={i * 0.08}>
-                            <Stat {...s} testId={`stat-${s.label.toLowerCase().replace(/\s+/g, "-")}`} />
+                        <Reveal key={s.label} delay={i * 0.08} className={s.span}>
+                            <StatCard stat={s} testId={`stat-${s.label.toLowerCase().replace(/\s+/g, "-")}`} />
                         </Reveal>
-                    ))}
-                </div>
-                <div className="mt-16 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                    {TOPICS.map((t, i) => (
-                        <span
-                            key={t}
-                            data-testid={`topic-chip-${t.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="glass-card animate-float !rounded-full px-5 py-2.5 font-mono2 text-[10px] uppercase tracking-[0.25em] text-[#A1A1AA] transition-colors duration-300 hover:border-[#22D3EE]/50 hover:text-[#22D3EE] sm:text-xs"
-                            style={{ animationDelay: `${i * 0.7}s`, animationDuration: `${5 + (i % 3)}s` }}
-                        >
-                            {t}
-                        </span>
                     ))}
                 </div>
             </div>
